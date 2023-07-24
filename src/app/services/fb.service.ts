@@ -7,9 +7,7 @@ import { initializeApp } from "firebase/app";
 export class FBService implements OnInit{
   private firebaseConfig: FBConfig;
   private app
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor() {
     this.firebaseConfig =  {
       apiKey: "AIzaSyCeefMV0_PXkd_GeFyepWdCMrTbdtwU4R0",
       authDomain: "autorepair-c20c6.firebaseapp.com",
@@ -20,5 +18,9 @@ export class FBService implements OnInit{
       appId: "1:1007989762427:web:299cec0158bb54edeff5de"
     };
     this.app = initializeApp(this.firebaseConfig)
+
+  }
+
+  ngOnInit(): void {
   }
 }
