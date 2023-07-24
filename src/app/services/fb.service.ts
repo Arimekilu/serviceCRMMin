@@ -5,7 +5,7 @@ import { initializeApp } from "firebase/app";
 @Injectable()
 
 export class FBService implements OnInit{
-  private firebaseConfig: FBConfig;
+  private readonly firebaseConfig: FBConfig;
   private app
   constructor() {
     this.firebaseConfig =  {
