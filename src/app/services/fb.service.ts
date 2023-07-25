@@ -1,7 +1,9 @@
 import {Injectable, OnInit} from '@angular/core';
 import {FBConfig} from "../Interfaces/FBInterfaces";
 import {initializeApp} from "firebase/app";
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth"
+import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
+import {regError} from "../Interfaces/errorInterfaces";
+
 
 // @ts-ignore
 @Injectable()
@@ -10,19 +12,24 @@ export class FBService {
   private readonly firebaseConfig: FBConfig;
   private app
   private auth
+  public regError: regError | null = null
+
   createUserWithEmailAndPass(email: string, password: string) {
-    createUserWithEmailAndPassword (this.auth, email, password)
-  .then((userCredential: any) => {
-      // Signed in
-      const user = userCredential.user;
-      // ...
-    }).catch((error: any) => {
+    createUserWithEmailAndPassword(this.auth, email, password)
+      .then((userCredential: any) => {
+        // Signed in
+        const user = userCredential.user;
+        console.log(userCredential.user)
+
+      }).catch((error: any) => {
       const errorCode = error.code;
       const errorMessage = error.message;
+      this.regError = error
     });
+
   }
 
-  private signInWithEmailAndPass (auth: any, email: string, password: string) {
+  private signInWithEmailAndPass(auth: any, email: string, password: string) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -35,7 +42,7 @@ export class FBService {
       })
   }
 
-  private onAuthStateChang (){
+  private onAuthStateChang() {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
@@ -48,6 +55,7 @@ export class FBService {
       }
     });
   }
+
   constructor() {
     this.firebaseConfig = {
       apiKey: "AIzaSyCeefMV0_PXkd_GeFyepWdCMrTbdtwU4R0",
