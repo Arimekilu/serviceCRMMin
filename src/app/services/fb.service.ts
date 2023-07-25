@@ -6,7 +6,7 @@ import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onA
 // @ts-ignore
 @Injectable()
 
-export class FBService implements OnInit {
+export class FBService {
   private readonly firebaseConfig: FBConfig;
   private app
   private auth
@@ -62,6 +62,5 @@ export class FBService implements OnInit {
     this.auth = getAuth(this.app)
   }
 
-  ngOnInit(): void {
-  }
+
 }
