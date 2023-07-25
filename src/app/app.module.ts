@@ -9,6 +9,7 @@ import { RegistrationPageComponent } from './components/registration-page/regist
 import {MatInputModule} from "@angular/material/input";
 import {FBService} from "./services/fb.service";
 import {MatButtonModule} from "@angular/material/button";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import {MatButtonModule} from "@angular/material/button";
     AppRoutingModule,
     BrowserAnimationsModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    ReactiveFormsModule
   ],
   providers: [FBService],
   bootstrap: [AppComponent]
