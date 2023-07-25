@@ -10,8 +10,8 @@ export class FBService {
   private readonly firebaseConfig: FBConfig;
   private app
   private auth
-  private createUserWithEmailAndPass(auth: any, email: string, password: string) {
-    createUserWithEmailAndPassword (auth, email, password)
+  createUserWithEmailAndPass(email: string, password: string) {
+    createUserWithEmailAndPassword (this.auth, email, password)
   .then((userCredential: any) => {
       // Signed in
       const user = userCredential.user;

@@ -17,8 +17,13 @@ export class RegistrationPageComponent {
     ) {
     this.registrationForm = formBuilder.group({
       email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.minLength(6)]]
+      password: [null, [Validators.required, Validators.minLength(6)]],
+      checkPass: [null, [Validators.required, Validators.minLength(6)]]
     })
   }
 
+  submit($event: MouseEvent) {
+    $event.preventDefault()
+    this.fbService.createUserWithEmailAndPass(this.registrationForm.value.email, this.registrationForm.value.password )
+  }
 }
