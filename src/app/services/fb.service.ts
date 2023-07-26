@@ -3,8 +3,7 @@ import {FBConfig} from "../Interfaces/FBInterfaces";
 import {initializeApp} from "firebase/app";
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword} from "firebase/auth"
 import {regError} from "../Interfaces/errorInterfaces";
-
-
+import {RegistrationErrorComponent} from "../components/errors/registration-error/registration-error.component";
 
 
 @Injectable()
@@ -19,31 +18,39 @@ export class FBService {
     createUserWithEmailAndPassword(this.auth, email, password)
       .then((userCredential: any) => {
         // Signed in
+        console.log('then')
         const user = userCredential.user;
         console.log(userCredential.user)
 
       }).catch((error: any) => {
+      console.log('catch')
       const errorCode = error.code;
       const errorMessage = error.message;
       const myError: regError = {
         code: error.code,
         message: error.message
       }
+      const appRoot = document.querySelector('.root')
+      console.log(appRoot)
+      appRoot?.insertAdjacentHTML('beforeend','<app-registration-error [error]=this.myError></app-registration-error>')
 //todo Добавить вызов модалки с компонентом ошибки
     });
 
   }
 
-  private signInWithEmailAndPass(auth: any, email: string, password: string) {
-    signInWithEmailAndPassword(auth, email, password)
+  signInWithEmailAndPass(email: string, password: string) {
+    signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         // Signed in
+
         const user = userCredential.user;
         // ...
       })
       .catch((error) => {
+
         const errorCode = error.code;
         const errorMessage = error.message;
+
       })
   }
 

@@ -1,1 +1,22 @@
-<p>login-page works!</p>
+<div class="container">
+  <h3>Login</h3>
+  <form [formGroup]="loginForm">
+    <mat-form-field>
+      <mat-label>Enter email</mat-label>
+      <input matInput type="email" placeholder="email" formControlName="email" >
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label>Enter password</mat-label>
+      <input matInput type="password" placeholder="password"  formControlName="password" >
+    </mat-form-field>
+
+
+    <button mat-raised-button
+            (click)="submit($event)"
+            [disabled]="loginForm.invalid"
+    >Registration</button>
+
+
+  </form>
+</div>

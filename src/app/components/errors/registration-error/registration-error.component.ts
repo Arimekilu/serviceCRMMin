@@ -7,5 +7,5 @@ import {regError} from "../../../Interfaces/errorInterfaces";
   styleUrls: ['./registration-error.component.scss']
 })
 export class RegistrationErrorComponent {
-@Input() regError: regError | undefined
+@Input() error: regError | undefined
 }
