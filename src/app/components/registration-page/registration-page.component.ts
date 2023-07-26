@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {FBService} from "../../services/fb.service";
 import {Router} from "@angular/router";
-import {regError} from "../../Interfaces/errorInterfaces";
+
 
 @Component({
   selector: 'app-registration-page',
@@ -11,7 +11,6 @@ import {regError} from "../../Interfaces/errorInterfaces";
 })
 export class RegistrationPageComponent {
   registrationForm: FormGroup
-  regError: regError | null = null
   disabledBtn: boolean = false
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +30,6 @@ export class RegistrationPageComponent {
     console.log(this.registrationForm.value)
     this.disabledBtn = true
     this.fbService.createUserWithEmailAndPass(this.registrationForm.value.email, this.registrationForm.value.password )
-    this.fbService.regError ? this.regError = this.fbService.regError : this.disabledBtn = false
     this.registrationForm.reset()
   }
 }

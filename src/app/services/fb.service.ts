@@ -1,18 +1,19 @@
-import {Injectable, OnInit} from '@angular/core';
+import {Injectable} from '@angular/core';
 import {FBConfig} from "../Interfaces/FBInterfaces";
 import {initializeApp} from "firebase/app";
-import {getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth"
+import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword} from "firebase/auth"
 import {regError} from "../Interfaces/errorInterfaces";
 
 
-// @ts-ignore
+
+
 @Injectable()
 
 export class FBService {
   private readonly firebaseConfig: FBConfig;
   private app
   private auth
-  public regError: regError | null = null
+
 
   createUserWithEmailAndPass(email: string, password: string) {
     createUserWithEmailAndPassword(this.auth, email, password)
@@ -24,7 +25,11 @@ export class FBService {
       }).catch((error: any) => {
       const errorCode = error.code;
       const errorMessage = error.message;
-      this.regError = error
+      const myError: regError = {
+        code: error.code,
+        message: error.message
+      }
+//todo Добавить вызов модалки с компонентом ошибки
     });
 
   }

@@ -1,0 +1,5 @@
+<div class="error" *ngIf="regError">
+  <h3>{{regError.code}}</h3>
+  <p>{{regError.message}}</p>
+  <button (click)="regError = undefined" mat-raised-button>Да и хуй с ним</button>
+</div>

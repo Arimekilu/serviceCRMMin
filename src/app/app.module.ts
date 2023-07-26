@@ -10,12 +10,14 @@ import {MatInputModule} from "@angular/material/input";
 import {FBService} from "./services/fb.service";
 import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
+import { RegistrationErrorComponent } from './components/errors/registration-error/registration-error.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
-    RegistrationPageComponent
+    RegistrationPageComponent,
+    RegistrationErrorComponent
   ],
   imports: [
     BrowserModule,
