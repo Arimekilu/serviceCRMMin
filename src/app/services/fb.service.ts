@@ -3,7 +3,9 @@ import {FBConfig} from "../Interfaces/FBInterfaces";
 import {initializeApp} from "firebase/app";
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword} from "firebase/auth"
 import {regError} from "../Interfaces/errorInterfaces";
-import {RegistrationErrorComponent} from "../components/errors/registration-error/registration-error.component";
+import {Observable, of} from "rxjs";
+import firebase from "firebase/compat";
+import User = firebase.User;
 
 
 @Injectable()
@@ -12,7 +14,11 @@ export class FBService {
   private readonly firebaseConfig: FBConfig;
   private app
   private auth
+  user?: Observable<User | null >
 
+  getUser() {
+    return this.auth.currentUser?.email
+  }
 
   createUserWithEmailAndPass(email: string, password: string) {
     createUserWithEmailAndPassword(this.auth, email, password)
@@ -32,7 +38,7 @@ export class FBService {
       }
       const appRoot = document.querySelector('.root')
       console.log(appRoot)
-      appRoot?.insertAdjacentHTML('beforeend','<app-registration-error [error]=this.myError></app-registration-error>')
+      appRoot?.insertAdjacentHTML('beforeend', '<app-registration-error [error]=this.myError></app-registration-error>')
 //todo Добавить вызов модалки с компонентом ошибки
     });
 
@@ -44,7 +50,7 @@ export class FBService {
         // Signed in
 
         const user = userCredential.user;
-        // ...
+
       })
       .catch((error) => {
 
@@ -54,13 +60,13 @@ export class FBService {
       })
   }
 
-  private onAuthStateChang() {
+  public onAuthStateChang() {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
-        // ...
+        console.log(user.uid)
       } else {
         // User is signed out
         // ...
