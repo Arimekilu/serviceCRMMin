@@ -10,7 +10,7 @@ import {cars, CarSelector} from "./cars";
 })
 export class CreateCarComponent  {
   cars: CarSelector[]
-  myControl = new FormControl('');
+  mark = new FormControl('');
   optionsMarks: string[] = []
   filteredOptions: Observable<string[]>;
   selectedBrand: any;
@@ -18,7 +18,7 @@ export class CreateCarComponent  {
   constructor() {
     this.cars = cars
     this.cars.forEach(carSelector =>this.optionsMarks.push(carSelector.brand))
-    this.filteredOptions = this.myControl.valueChanges.pipe(
+    this.filteredOptions = this.mark.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value || '')),
     );
