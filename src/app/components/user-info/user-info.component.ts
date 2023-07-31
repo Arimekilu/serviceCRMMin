@@ -13,15 +13,15 @@ export class UserInfoComponent implements OnInit {
 
   user?: string | null
   getUser(){
-    this.user = this.fbService.getUser()
-    this.fbService.onAuthStateChang()
+    this.fbService.getUser().subscribe(res => this.user = res)
   }
 
   constructor(private fbService: FBService) {
+    this.fbService.currentUser$?.subscribe(userEmail => this.user = userEmail)
   }
 
   ngOnInit(): void {
-    this.getUser()
+
 
   }
 

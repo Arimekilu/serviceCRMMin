@@ -1,0 +1,36 @@
+<form class="container">
+  <mat-form-field class="example-full-width">
+    <mat-label>Марка</mat-label>
+    <input type="text"
+           placeholder="Pick one"
+           aria-label="Марка"
+           matInput
+           [formControl]="mark"
+           [matAutocomplete]="auto"
+          [(ngModel)]="selectedBrand"
+           value="Audi"
+    >
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+  <p>{{selectedBrand}}</p>
+
+  <mat-form-field class="example-full-width">
+    <mat-label>Модель</mat-label>
+    <input type="text"
+           placeholder="Pick one"
+           aria-label="Модель"
+           matInput
+           [formControl]="model"
+           [matAutocomplete]="auto"
+    >
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option *ngFor="let option of filteredModels | async" [value]="option">
+        {{option}}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>

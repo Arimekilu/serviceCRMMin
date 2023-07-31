@@ -12,6 +12,10 @@ import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import { RegistrationErrorComponent } from './components/errors/registration-error/registration-error.component';
 import { UserInfoComponent } from './components/user-info/user-info.component';
+import { CreateClientComponent } from './components/clients/create-client/create-client.component';
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import { CreateCarComponent } from './components/create-car/create-car.component';
+import { SelectModelComponent } from './components/create-car/select-model/select-model.component';
 
 @NgModule({
   declarations: [
@@ -19,16 +23,20 @@ import { UserInfoComponent } from './components/user-info/user-info.component';
     LoginPageComponent,
     RegistrationPageComponent,
     RegistrationErrorComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    CreateClientComponent,
+    CreateCarComponent,
+    SelectModelComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatInputModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        MatAutocompleteModule
+    ],
   providers: [FBService],
   bootstrap: [AppComponent]
 })

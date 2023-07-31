@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, OnInit} from '@angular/core';
 import {FBConfig} from "../Interfaces/FBInterfaces";
 import {initializeApp} from "firebase/app";
 import {createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword} from "firebase/auth"
@@ -10,14 +10,16 @@ import User = firebase.User;
 
 @Injectable()
 
-export class FBService {
+export class FBService implements OnInit{
   private readonly firebaseConfig: FBConfig;
   private app
   private auth
+  public databaseURL: string
   user?: Observable<User | null >
+  currentUser$?: Observable<string | null> | null = null
 
   getUser() {
-    return this.auth.currentUser?.email
+    return of(this.auth.currentUser?.email)
   }
 
   createUserWithEmailAndPass(email: string, password: string) {
@@ -48,15 +50,11 @@ export class FBService {
     signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
         // Signed in
-
         const user = userCredential.user;
-
       })
       .catch((error) => {
-
         const errorCode = error.code;
         const errorMessage = error.message;
-
       })
   }
 
@@ -66,7 +64,6 @@ export class FBService {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/auth.user
         const uid = user.uid;
-        console.log(user.uid)
       } else {
         // User is signed out
         // ...
@@ -84,8 +81,14 @@ export class FBService {
       messagingSenderId: "1007989762427",
       appId: "1:1007989762427:web:299cec0158bb54edeff5de"
     };
+    this.databaseURL = "https://autorepair-c20c6-default-rtdb.europe-west1.firebasedatabase.app"
     this.app = initializeApp(this.firebaseConfig)
     this.auth = getAuth(this.app)
+  }
+
+  ngOnInit(): void {
+    // @ts-ignore
+    this.currentUser$ = of(this.auth.currentUser?.email)
   }
 
 

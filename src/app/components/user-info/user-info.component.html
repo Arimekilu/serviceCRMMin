@@ -1,5 +1,5 @@
 <div class="container">
-  <p>{{user}}</p>
-  <p>There is no user here</p>
+  <p *ngIf="user">{{user}}</p>
+  <p *ngIf = '!user'>There is no user here</p>
   <button (click)="getUser()">getUser</button>
 </div>
